@@ -2,76 +2,125 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=240,height=320">
+<meta name="viewport" content="width=240, height=320, initial-scale=1">
+
 <title>Spotify</title>
 
 <style>
-body {
+html, body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
     background: #121212;
     color: white;
-    font-family: Arial;
+    font-family: Arial, sans-serif;
 }
 
-#app {
-    padding: 12px;
+.container {
+    padding: 10px;
+}
+
+h1 {
+    margin: 5px 0 15px 0;
+    font-size: 22px;
 }
 
 button {
     display: block;
     width: 100%;
-    margin: 7px 0;
-    padding: 12px;
+    height: 42px;
+    margin-bottom: 7px;
     border: 0;
-    border-radius: 6px;
+    border-radius: 5px;
     background: #282828;
     color: white;
     font-size: 13px;
+    text-align: left;
+    padding-left: 12px;
 }
 
 button:active {
     background: #1ed760;
     color: black;
 }
+
+#message {
+    margin-top: 15px;
+    color: #999;
+    font-size: 10px;
+}
 </style>
 </head>
 
 <body>
 
-<div id="app">
+<div class="container">
 
-<h2>♫ SPOTIFY</h2>
+    <h1>♫ SPOTIFY</h1>
 
-<button onclick="buscar()">🔎 Buscar</button>
-<button onclick="playlists()">🎵 Mis playlists</button>
-<button onclick="canciones()">♥ Mis canciones</button>
-<button onclick="player()">▶ Reproducción actual</button>
+    <button onclick="searchMusic()">
+        🔎 Buscar
+    </button>
 
-<p id="status">Widget funcionando</p>
+    <button onclick="showPlaylists()">
+        🎵 Mis playlists
+    </button>
+
+    <button onclick="showLiked()">
+        ♥ Mis canciones
+    </button>
+
+    <button onclick="showPlayer()">
+        ▶ Reproducción actual
+    </button>
+
+    <div id="message">
+        Widget iniciado correctamente
+    </div>
 
 </div>
 
 <script>
 
-function buscar() {
-    document.getElementById("status").innerText =
-    "🔎 Búsqueda seleccionada";
+function searchMusic() {
+    document.getElementById("message").innerHTML =
+        "Buscar música";
 }
 
-function playlists() {
-    document.getElementById("status").innerText =
-    "🎵 Playlists seleccionadas";
+function showPlaylists() {
+    document.getElementById("message").innerHTML =
+        "Mis playlists";
 }
 
-function canciones() {
-    document.getElementById("status").innerText =
-    "♥ Canciones seleccionadas";
+function showLiked() {
+    document.getElementById("message").innerHTML =
+        "Mis canciones";
 }
 
-function player() {
-    document.getElementById("status").innerText =
-    "▶ Reproductor seleccionado";
+function showPlayer() {
+    document.getElementById("message").innerHTML =
+        "Reproducción actual";
 }
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "ArrowDown") {
+        document.getElementById("message").innerHTML =
+            "↓";
+    }
+
+    if (event.key === "ArrowUp") {
+        document.getElementById("message").innerHTML =
+            "↑";
+    }
+
+    if (event.key === "Enter") {
+        document.getElementById("message").innerHTML =
+            "ENTER";
+    }
+
+});
 
 </script>
 
