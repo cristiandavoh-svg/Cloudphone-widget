@@ -2,114 +2,162 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=240,height=320,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport"
+      content="width=240,height=320,initial-scale=1,maximum-scale=1,user-scalable=no">
+
 <title>Spotify CloudPhone</title>
 
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
 html,body{
- margin:0;
- padding:0;
- width:100%;
- min-height:100%;
- background:#121212;
- color:white;
- font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  background:#121212;
+  color:#fff;
+  font-family:Arial,sans-serif;
 }
-body{overflow-x:hidden}
+
+body{
+  overflow-x:hidden;
+}
+
 #app{
- width:240px;
- min-height:320px;
- padding:8px;
- margin:auto;
+  width:240px;
+  min-height:320px;
+  margin:auto;
+  padding:8px;
 }
-.screen{display:none}
-.screen.active{display:block}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
 .logo{
- font-size:18px;
- font-weight:bold;
- margin:4px 0 10px;
+  font-size:18px;
+  font-weight:bold;
+  margin:4px 0 10px;
 }
+
 button{
- width:100%;
- min-height:36px;
- margin:4px 0;
- padding:7px 9px;
- border:0;
- border-radius:5px;
- background:#282828;
- color:white;
- font-size:10px;
- text-align:left;
- cursor:pointer;
+  width:100%;
+  min-height:36px;
+  margin:4px 0;
+  padding:7px 9px;
+  border:0;
+  border-radius:5px;
+  background:#282828;
+  color:#fff;
+  font-size:10px;
+  text-align:left;
 }
-button:active{background:#1db954;color:#000}
-.green{background:#1db954;color:#000;font-weight:bold}
+
+button:active{
+  background:#1db954;
+  color:#000;
+}
+
+.green{
+  background:#1db954;
+  color:#000;
+  font-weight:bold;
+}
+
 input{
- width:100%;
- height:34px;
- padding:7px;
- border:0;
- border-radius:5px;
- background:#282828;
- color:white;
- font-size:10px;
+  width:100%;
+  height:34px;
+  padding:7px;
+  border:0;
+  border-radius:5px;
+  background:#282828;
+  color:#fff;
+  font-size:10px;
 }
+
 .list{
- max-height:230px;
- overflow-y:auto;
+  max-height:225px;
+  overflow-y:auto;
 }
+
 .item{
- width:100%;
- min-height:40px;
- margin:4px 0;
- padding:7px;
- border-radius:5px;
- background:#1d1d1d;
- cursor:pointer;
+  width:100%;
+  min-height:40px;
+  margin:4px 0;
+  padding:7px;
+  border-radius:5px;
+  background:#1d1d1d;
 }
-.item:active{background:#333}
+
+.item:active{
+  background:#333;
+}
+
 .item-title{
- font-size:10px;
- font-weight:bold;
+  font-size:10px;
+  font-weight:bold;
 }
+
 .item-subtitle{
- margin-top:3px;
- color:#999;
- font-size:8px;
+  margin-top:3px;
+  color:#999;
+  font-size:8px;
 }
-#status{
- margin-top:6px;
- color:#999;
- font-size:8px;
- min-height:14px;
-}
-.controls{
- display:flex;
- gap:4px;
-}
-.controls button{
- text-align:center;
- font-size:16px;
-}
-.player{
- text-align:center;
- padding:12px 0;
-}
-.player-title{
- font-size:13px;
- font-weight:bold;
-}
-.player-artist{
- margin-top:5px;
- color:#aaa;
- font-size:9px;
-}
+
 .empty{
- color:#999;
- font-size:10px;
- padding:10px 0;
- text-align:center;
+  color:#999;
+  font-size:10px;
+  text-align:center;
+  padding:10px;
+}
+
+#status{
+  margin-top:6px;
+  min-height:15px;
+  color:#999;
+  font-size:8px;
+}
+
+.player{
+  text-align:center;
+  padding:10px 0;
+}
+
+.player-title{
+  font-size:13px;
+  font-weight:bold;
+}
+
+.player-artist{
+  margin-top:5px;
+  color:#aaa;
+  font-size:9px;
+}
+
+.controls{
+  display:flex;
+  gap:4px;
+}
+
+.controls button{
+  text-align:center;
+  font-size:15px;
+}
+
+.good{
+  color:#1db954;
+}
+
+.bad{
+  color:#ff6666;
 }
 </style>
 </head>
@@ -118,82 +166,226 @@ input{
 
 <div id="app">
 
-<!-- HOME -->
+<!-- ================= INICIO ================= -->
+
 <div id="home" class="screen active">
+
   <div class="logo">♫ SPOTIFY</div>
 
-  <button id="loginBtn" class="green">INICIAR SESION</button>
-  <button id="searchBtn">BUSCAR</button>
-  <button id="playlistBtn">MIS PLAYLISTS</button>
-  <button id="likedBtn">MIS CANCIONES GUARDADAS</button>
-  <button id="currentBtn">REPRODUCCION ACTUAL</button>
-  <button id="logoutBtn">CERRAR SESION</button>
+  <button id="loginBtn" class="green">
+    INICIAR SESION
+  </button>
+
+  <button id="searchBtn">
+    🔎 BUSCAR
+  </button>
+
+  <button id="playlistBtn">
+    🎵 MIS PLAYLISTS
+  </button>
+
+  <button id="likedBtn">
+    ♥ MIS CANCIONES
+  </button>
+
+  <button id="playerBtn">
+    🎧 REPRODUCTOR NOKIA
+  </button>
+
+  <button id="currentBtn">
+    ▶ REPRODUCCION ACTUAL
+  </button>
+
+  <button id="logoutBtn">
+    CERRAR SESION
+  </button>
+
 </div>
 
-<!-- SEARCH -->
+
+<!-- ================= BUSQUEDA ================= -->
+
 <div id="searchScreen" class="screen">
+
   <div class="logo">BUSCAR</div>
 
-  <input id="searchInput" type="text" placeholder="Cancion o artista">
+  <input
+    id="searchInput"
+    type="text"
+    placeholder="Cancion o artista"
+  >
 
-  <button id="searchGo" class="green">BUSCAR</button>
+  <button id="searchGo" class="green">
+    BUSCAR
+  </button>
 
   <div id="searchResults" class="list"></div>
 
-  <button id="searchBack">VOLVER</button>
+  <button id="searchBack">
+    VOLVER
+  </button>
+
 </div>
 
-<!-- PLAYLISTS -->
+
+<!-- ================= PLAYLISTS ================= -->
+
 <div id="playlistScreen" class="screen">
-  <div class="logo">MIS PLAYLISTS</div>
+
+  <div class="logo">
+    MIS PLAYLISTS
+  </div>
 
   <div id="playlistResults" class="list"></div>
 
-  <button id="playlistBack">VOLVER</button>
+  <button id="playlistBack">
+    VOLVER
+  </button>
+
 </div>
 
-<!-- TRACKS -->
+
+<!-- ================= CANCIONES ================= -->
+
 <div id="tracksScreen" class="screen">
-  <div class="logo" id="tracksTitle">CANCIONES</div>
+
+  <div class="logo" id="tracksTitle">
+    CANCIONES
+  </div>
 
   <div id="tracksResults" class="list"></div>
 
-  <button id="tracksBack">VOLVER</button>
+  <button id="tracksBack">
+    VOLVER
+  </button>
+
 </div>
 
-<!-- PLAYER -->
+
+<!-- ================= REPRODUCTOR ================= -->
+
 <div id="playerScreen" class="screen">
-  <div class="logo">REPRODUCCION</div>
+
+  <div class="logo">
+    🎧 REPRODUCTOR
+  </div>
+
+  <div id="deviceStatus" class="empty">
+    Comprobando reproductor...
+  </div>
+
+  <button id="activateBtn" class="green">
+    ACTIVAR AUDIO
+  </button>
 
   <div id="playerInfo" class="player">
-    <div class="player-title">Nada reproduciéndose</div>
-    <div class="player-artist">—</div>
+
+    <div class="player-title">
+      Nada reproduciéndose
+    </div>
+
+    <div class="player-artist">
+      —
+    </div>
+
   </div>
 
   <div class="controls">
-    <button id="previousBtn">◀</button>
-    <button id="playBtn">▶</button>
-    <button id="nextBtn">▶▶</button>
+
+    <button id="previousBtn">
+      ◀
+    </button>
+
+    <button id="playBtn">
+      ▶
+    </button>
+
+    <button id="nextBtn">
+      ▶▶
+    </button>
+
   </div>
 
-  <button id="refreshPlayer">ACTUALIZAR</button>
-  <button id="playerBack">VOLVER</button>
+  <button id="transferBtn">
+    🎧 USAR ESTE NOKIA
+  </button>
+
+  <button id="refreshPlayer">
+    ACTUALIZAR
+  </button>
+
+  <button id="playerBack">
+    VOLVER
+  </button>
+
 </div>
 
-<div id="status">Widget listo</div>
+
+<!-- ================= REPRODUCCION ACTUAL ================= -->
+
+<div id="currentScreen" class="screen">
+
+  <div class="logo">
+    REPRODUCCION
+  </div>
+
+  <div id="currentInfo" class="player">
+
+    <div class="player-title">
+      Nada reproduciéndose
+    </div>
+
+    <div class="player-artist">
+      —
+    </div>
+
+  </div>
+
+  <button id="currentRefresh">
+    ACTUALIZAR
+  </button>
+
+  <button id="currentBack">
+    VOLVER
+  </button>
 
 </div>
+
+
+<div id="status">
+  Widget listo
+</div>
+
+</div>
+
+
+<!-- ================================================= -->
+<!-- SPOTIFY WEB PLAYBACK SDK                          -->
+<!-- ================================================= -->
+
+<script src="https://sdk.scdn.co/spotify-player.js"></script>
+
 
 <script>
 
-/* ================= CONFIGURACION ================= */
+/* ====================================================
+   CONFIGURACION
+==================================================== */
 
-var CLIENT_ID = "8b61d543ab204a01986a47f38e419304";
+var CLIENT_ID =
+"8b61d543ab204a01986a47f38e419304";
 
 var REDIRECT_URI =
 "https://cristiandavoh-svg.github.io/Cloudphone-widget/";
 
-var API = "https://api.spotify.com/v1";
+var API =
+"https://api.spotify.com/v1";
+
+
+/*
+ * IMPORTANTE:
+ * streaming es necesario para Web Playback SDK.
+ */
 
 var SCOPES =
 "user-read-private " +
@@ -203,41 +395,74 @@ var SCOPES =
 "user-library-read " +
 "user-read-playback-state " +
 "user-read-currently-playing " +
-"user-modify-playback-state";
+"user-modify-playback-state " +
+"streaming";
 
 
-/* ================= ELEMENTOS ================= */
+/* ====================================================
+   ELEMENTOS
+==================================================== */
 
-var home = document.getElementById("home");
-var searchScreen = document.getElementById("searchScreen");
-var playlistScreen = document.getElementById("playlistScreen");
-var tracksScreen = document.getElementById("tracksScreen");
-var playerScreen = document.getElementById("playerScreen");
-var status = document.getElementById("status");
+var home =
+document.getElementById("home");
+
+var searchScreen =
+document.getElementById("searchScreen");
+
+var playlistScreen =
+document.getElementById("playlistScreen");
+
+var tracksScreen =
+document.getElementById("tracksScreen");
+
+var playerScreen =
+document.getElementById("playerScreen");
+
+var currentScreen =
+document.getElementById("currentScreen");
+
+var status =
+document.getElementById("status");
+
+var deviceStatus =
+document.getElementById("deviceStatus");
 
 
-/* ================= UTILIDADES ================= */
+/* ====================================================
+   UTILIDADES
+==================================================== */
 
 function setStatus(text){
   status.textContent = text;
 }
 
+
 function show(screen){
+
   home.className = "screen";
   searchScreen.className = "screen";
   playlistScreen.className = "screen";
   tracksScreen.className = "screen";
   playerScreen.className = "screen";
+  currentScreen.className = "screen";
 
-  screen.className = "screen active";
+  screen.className =
+  "screen active";
 }
+
 
 function homePage(){
+
   show(home);
-  setStatus("Menu principal");
+
+  setStatus(
+    "Menu principal"
+  );
 }
 
+
 function escapeHTML(text){
+
   return String(text || "")
     .replace(/&/g,"&amp;")
     .replace(/</g,"&lt;")
@@ -246,40 +471,82 @@ function escapeHTML(text){
     .replace(/'/g,"&#039;");
 }
 
-function addButton(element,callback){
-  element.addEventListener("click",callback,false);
 
-  element.addEventListener("touchend",function(e){
-    e.preventDefault();
-    callback();
-  },false);
+function addButton(element,callback){
+
+  element.addEventListener(
+    "click",
+    callback,
+    false
+  );
+
+  element.addEventListener(
+    "touchend",
+    function(e){
+
+      e.preventDefault();
+
+      callback();
+
+    },
+    false
+  );
 }
 
 
-/* ================= PKCE ================= */
+/* ====================================================
+   PKCE
+==================================================== */
 
 function randomString(length){
+
   var chars =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+  "abcdefghijklmnopqrstuvwxyz" +
+  "0123456789";
 
   var result = "";
-  var values = new Uint8Array(length);
+
+  var values =
+  new Uint8Array(length);
 
   crypto.getRandomValues(values);
 
-  for(var i=0;i<length;i++){
-    result += chars[values[i] % chars.length];
+  for(
+    var i=0;
+    i<length;
+    i++
+  ){
+
+    result +=
+    chars[
+      values[i] % chars.length
+    ];
+
   }
 
   return result;
 }
 
+
 function base64url(buffer){
-  var bytes = new Uint8Array(buffer);
+
+  var bytes =
+  new Uint8Array(buffer);
+
   var binary = "";
 
-  for(var i=0;i<bytes.byteLength;i++){
-    binary += String.fromCharCode(bytes[i]);
+  for(
+    var i=0;
+    i<bytes.byteLength;
+    i++
+  ){
+
+    binary +=
+    String.fromCharCode(
+      bytes[i]
+    );
+
   }
 
   return btoa(binary)
@@ -288,11 +555,17 @@ function base64url(buffer){
     .replace(/=+$/,"");
 }
 
-async function createChallenge(verifier){
-  var encoder = new TextEncoder();
-  var data = encoder.encode(verifier);
 
-  var digest = await crypto.subtle.digest(
+async function createChallenge(verifier){
+
+  var encoder =
+  new TextEncoder();
+
+  var data =
+  encoder.encode(verifier);
+
+  var digest =
+  await crypto.subtle.digest(
     "SHA-256",
     data
   );
@@ -301,22 +574,40 @@ async function createChallenge(verifier){
 }
 
 
-/* ================= LOGIN ================= */
+/* ====================================================
+   LOGIN
+==================================================== */
 
 async function login(){
 
   try{
 
-    if(!window.crypto || !window.crypto.subtle){
-      setStatus("Este navegador no soporta PKCE");
+    if(
+      !window.crypto ||
+      !window.crypto.subtle
+    ){
+
+      setStatus(
+        "PKCE no compatible"
+      );
+
       return;
     }
 
-    setStatus("Preparando Spotify...");
+    setStatus(
+      "Preparando Spotify..."
+    );
 
-    var verifier = randomString(64);
-    var challenge = await createChallenge(verifier);
-    var state = randomString(32);
+    var verifier =
+    randomString(64);
+
+    var challenge =
+    await createChallenge(
+      verifier
+    );
+
+    var state =
+    randomString(32);
 
     localStorage.setItem(
       "spotify_code_verifier",
@@ -328,96 +619,170 @@ async function login(){
       state
     );
 
-    var auth = new URL(
+    var auth =
+    new URL(
       "https://accounts.spotify.com/authorize"
     );
 
-    auth.search = new URLSearchParams({
-      client_id: CLIENT_ID,
-      response_type: "code",
-      redirect_uri: REDIRECT_URI,
-      scope: SCOPES,
-      state: state,
-      code_challenge_method: "S256",
-      code_challenge: challenge
+    auth.search =
+    new URLSearchParams({
+
+      client_id:
+      CLIENT_ID,
+
+      response_type:
+      "code",
+
+      redirect_uri:
+      REDIRECT_URI,
+
+      scope:
+      SCOPES,
+
+      state:
+      state,
+
+      code_challenge_method:
+      "S256",
+
+      code_challenge:
+      challenge
+
     });
 
-    window.location.href = auth.toString();
+    window.location.href =
+    auth.toString();
 
-  }catch(error){
+  }
+  catch(error){
+
     console.log(error);
-    setStatus("Error iniciando Spotify");
+
+    setStatus(
+      "Error iniciando Spotify"
+    );
+
   }
 }
 
 
-/* ================= CALLBACK ================= */
+/* ====================================================
+   CALLBACK
+==================================================== */
 
 async function processCallback(){
 
-  var params = new URLSearchParams(
+  var params =
+  new URLSearchParams(
     window.location.search
   );
 
-  var error = params.get("error");
-  var code = params.get("code");
+  var error =
+  params.get("error");
+
+  var code =
+  params.get("code");
 
   if(error){
-    setStatus("Spotify: " + error);
+
+    setStatus(
+      "Spotify: " + error
+    );
+
     return;
   }
 
   if(!code){
+
     return;
   }
 
-  var savedState = localStorage.getItem(
+  var savedState =
+  localStorage.getItem(
     "spotify_state"
   );
 
-  var returnedState = params.get("state");
+  var returnedState =
+  params.get("state");
 
-  if(savedState && returnedState !== savedState){
-    setStatus("Error de seguridad");
+  if(
+    savedState &&
+    returnedState !== savedState
+  ){
+
+    setStatus(
+      "Error de seguridad"
+    );
+
     return;
   }
 
-  var verifier = localStorage.getItem(
+  var verifier =
+  localStorage.getItem(
     "spotify_code_verifier"
   );
 
   if(!verifier){
-    setStatus("No se encontró el verificador PKCE");
+
+    setStatus(
+      "Falta PKCE"
+    );
+
     return;
   }
 
   try{
 
-    setStatus("Conectando con Spotify...");
+    setStatus(
+      "Conectando con Spotify..."
+    );
 
-    var response = await fetch(
+    var response =
+    await fetch(
       "https://accounts.spotify.com/api/token",
       {
+
         method:"POST",
+
         headers:{
           "Content-Type":
           "application/x-www-form-urlencoded"
         },
-        body:new URLSearchParams({
-          client_id:CLIENT_ID,
-          grant_type:"authorization_code",
-          code:code,
-          redirect_uri:REDIRECT_URI,
-          code_verifier:verifier
+
+        body:
+        new URLSearchParams({
+
+          client_id:
+          CLIENT_ID,
+
+          grant_type:
+          "authorization_code",
+
+          code:
+          code,
+
+          redirect_uri:
+          REDIRECT_URI,
+
+          code_verifier:
+          verifier
+
         })
+
       }
     );
 
-    var data = await response.json();
+    var data =
+    await response.json();
 
     if(!response.ok){
+
       console.log(data);
-      setStatus("Spotify rechazó el login");
+
+      setStatus(
+        "Spotify rechazo el login"
+      );
+
       return;
     }
 
@@ -427,21 +792,29 @@ async function processCallback(){
     );
 
     if(data.refresh_token){
+
       localStorage.setItem(
         "spotify_refresh_token",
         data.refresh_token
       );
+
     }
 
     localStorage.setItem(
       "spotify_expires",
       String(
-        Date.now() + data.expires_in * 1000
+        Date.now() +
+        data.expires_in * 1000
       )
     );
 
-    localStorage.removeItem("spotify_code_verifier");
-    localStorage.removeItem("spotify_state");
+    localStorage.removeItem(
+      "spotify_code_verifier"
+    );
+
+    localStorage.removeItem(
+      "spotify_state"
+    );
 
     window.history.replaceState(
       {},
@@ -449,170 +822,800 @@ async function processCallback(){
       REDIRECT_URI
     );
 
-    setStatus("Spotify conectado ✓");
+    setStatus(
+      "Spotify conectado ✓"
+    );
 
-  }catch(error){
-    console.log(error);
-    setStatus("Error conectando Spotify");
   }
+  catch(error){
+
+    console.log(error);
+
+    setStatus(
+      "Error conectando Spotify"
+    );
+
+  }
+
 }
 
 
-/* ================= TOKEN ================= */
+/* ====================================================
+   TOKEN
+==================================================== */
 
 function getToken(){
+
   return localStorage.getItem(
     "spotify_access_token"
   );
+
 }
 
 
-/* ================= API ================= */
+/* ====================================================
+   SPOTIFY API
+==================================================== */
 
-async function spotify(url,options){
+async function spotify(
+  url,
+  options
+){
 
-  var token = getToken();
+  var token =
+  getToken();
 
   if(!token){
-    throw new Error("NO_LOGIN");
+
+    throw new Error(
+      "NO_LOGIN"
+    );
+
   }
 
-  options = options || {};
-  options.headers = options.headers || {};
+  options =
+  options || {};
+
+  options.headers =
+  options.headers || {};
 
   options.headers.Authorization =
   "Bearer " + token;
 
-  var response = await fetch(
+  var response =
+  await fetch(
     url,
     options
   );
 
-  if(response.status === 401){
+  if(
+    response.status === 401
+  ){
+
     localStorage.removeItem(
       "spotify_access_token"
     );
-    throw new Error("SESSION_EXPIRED");
+
+    throw new Error(
+      "SESSION_EXPIRED"
+    );
+
   }
 
-  if(response.status === 204){
+  if(
+    response.status === 204
+  ){
+
     return null;
+
   }
 
   var data;
 
   try{
-    data = await response.json();
-  }catch(e){
+
+    data =
+    await response.json();
+
+  }
+  catch(e){
+
     data = {};
+
   }
 
   if(!response.ok){
-    console.log(data);
+
     throw new Error(
-      data.error && data.error.message ?
-      data.error.message :
-      "Error de Spotify"
+      data.error &&
+      data.error.message
+      ?
+      data.error.message
+      :
+      "Error Spotify"
     );
+
   }
 
   return data;
 }
 
 
-/* ================= PLAYLISTS ================= */
+/* ====================================================
+   WEB PLAYBACK SDK
+==================================================== */
+
+var spotifyPlayer = null;
+
+var nokiaDeviceId = null;
+
+var sdkLoaded = false;
+
+var sdkReady = false;
+
+
+/*
+ * Esta funcion es llamada automaticamente
+ * por Spotify cuando carga el SDK.
+ */
+
+window.onSpotifyWebPlaybackSDKReady =
+function(){
+
+  sdkLoaded = true;
+
+  setStatus(
+    "SDK de Spotify cargado"
+  );
+
+  if(!getToken()){
+
+    deviceStatus.innerHTML =
+    "Inicia sesión primero";
+
+    return;
+  }
+
+  initializePlayer();
+
+};
+
+
+/* ====================================================
+   INICIALIZAR PLAYER
+==================================================== */
+
+function initializePlayer(){
+
+  if(
+    !window.Spotify ||
+    !window.Spotify.Player
+  ){
+
+    deviceStatus.innerHTML =
+    "<span class='bad'>" +
+    "SDK no disponible" +
+    "</span>";
+
+    return;
+  }
+
+
+  deviceStatus.textContent =
+  "Inicializando Nokia...";
+
+
+  spotifyPlayer =
+  new Spotify.Player({
+
+    name:
+    "Nokia 105 4G - CloudPhone",
+
+    getOAuthToken:
+    function(callback){
+
+      var token =
+      getToken();
+
+      callback(token);
+
+    },
+
+    volume:0.7,
+
+    enableMediaSession:true
+
+  });
+
+
+  /* READY */
+
+  spotifyPlayer.addListener(
+    "ready",
+    function(data){
+
+      nokiaDeviceId =
+      data.device_id;
+
+      sdkReady = true;
+
+      deviceStatus.innerHTML =
+      "<span class='good'>" +
+      "✓ Nokia disponible" +
+      "</span>";
+
+      setStatus(
+        "Reproductor Nokia listo"
+      );
+
+      console.log(
+        "Nokia Device ID:",
+        nokiaDeviceId
+      );
+
+    }
+  );
+
+
+  /* NOT READY */
+
+  spotifyPlayer.addListener(
+    "not_ready",
+    function(data){
+
+      sdkReady = false;
+
+      deviceStatus.innerHTML =
+      "<span class='bad'>" +
+      "Nokia desconectado" +
+      "</span>";
+
+      console.log(
+        "Device offline:",
+        data.device_id
+      );
+
+    }
+  );
+
+
+  /* INITIALIZATION ERROR */
+
+  spotifyPlayer.addListener(
+    "initialization_error",
+    function(data){
+
+      deviceStatus.innerHTML =
+      "<span class='bad'>" +
+      "✕ Nokia no compatible" +
+      "</span>";
+
+      setStatus(
+        "Error de reproducción: " +
+        data.message
+      );
+
+      console.log(
+        "INITIALIZATION ERROR:",
+        data.message
+      );
+
+    }
+  );
+
+
+  /* AUTH ERROR */
+
+  spotifyPlayer.addListener(
+    "authentication_error",
+    function(data){
+
+      deviceStatus.innerHTML =
+      "<span class='bad'>" +
+      "Error de autenticación" +
+      "</span>";
+
+      setStatus(
+        "Auth: " +
+        data.message
+      );
+
+    }
+  );
+
+
+  /* ACCOUNT ERROR */
+
+  spotifyPlayer.addListener(
+    "account_error",
+    function(data){
+
+      deviceStatus.innerHTML =
+      "<span class='bad'>" +
+      "Cuenta no compatible" +
+      "</span>";
+
+      setStatus(
+        "Se necesita Spotify Premium"
+      );
+
+    }
+  );
+
+
+  /* PLAYBACK ERROR */
+
+  spotifyPlayer.addListener(
+    "playback_error",
+    function(data){
+
+      setStatus(
+        "Error audio: " +
+        data.message
+      );
+
+      console.log(
+        "PLAYBACK ERROR:",
+        data.message
+      );
+
+    }
+  );
+
+
+  /* AUTOPLAY */
+
+  spotifyPlayer.addListener(
+    "autoplay_failed",
+    function(){
+
+      setStatus(
+        "Pulsa ACTIVAR AUDIO"
+      );
+
+    }
+  );
+
+
+  /* TRACK */
+
+  spotifyPlayer.addListener(
+    "player_state_changed",
+    function(state){
+
+      if(!state){
+
+        return;
+      }
+
+      var track =
+      state.track_window.current_track;
+
+      if(!track){
+
+        return;
+      }
+
+      document.getElementById(
+        "playerInfo"
+      ).innerHTML =
+
+      "<div class='player-title'>" +
+      escapeHTML(
+        track.name
+      ) +
+      "</div>" +
+
+      "<div class='player-artist'>" +
+      escapeHTML(
+        track.artists
+        .map(function(a){
+          return a.name;
+        })
+        .join(", ")
+      ) +
+      "</div>";
+
+      document.getElementById(
+        "playBtn"
+      ).textContent =
+      state.paused
+      ? "▶"
+      : "Ⅱ";
+
+    }
+  );
+
+
+  /*
+   * IMPORTANTE:
+   * activateElement ayuda con las
+   * restricciones de autoplay.
+   */
+
+  spotifyPlayer.connect()
+    .then(function(success){
+
+      if(success){
+
+        setStatus(
+          "Spotify Player conectado"
+        );
+
+      }else{
+
+        setStatus(
+          "No se pudo conectar"
+        );
+
+      }
+
+    })
+    .catch(function(error){
+
+      console.log(error);
+
+      setStatus(
+        "No compatible con este navegador"
+      );
+
+    });
+
+}
+
+
+/* ====================================================
+   ACTIVAR AUDIO
+==================================================== */
+
+async function activateAudio(){
+
+  if(!spotifyPlayer){
+
+    setStatus(
+      "El reproductor todavía no está listo"
+    );
+
+    return;
+  }
+
+  try{
+
+    if(
+      spotifyPlayer.activateElement
+    ){
+
+      await spotifyPlayer.activateElement();
+
+    }
+
+    setStatus(
+      "Audio activado"
+    );
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    setStatus(
+      "No se pudo activar el audio"
+    );
+
+  }
+
+}
+
+
+/* ====================================================
+   TRANSFERIR A NOKIA
+==================================================== */
+
+async function transferToNokia(){
+
+  if(!nokiaDeviceId){
+
+    setStatus(
+      "El Nokia todavía no está disponible"
+    );
+
+    return;
+  }
+
+  try{
+
+    await spotify(
+      API + "/me/player",
+      {
+
+        method:"PUT",
+
+        headers:{
+          "Content-Type":
+          "application/json"
+        },
+
+        body:JSON.stringify({
+
+          device_ids:[
+            nokiaDeviceId
+          ],
+
+          play:false
+
+        })
+
+      }
+    );
+
+    setStatus(
+      "Reproducción enviada al Nokia"
+    );
+
+    /*
+     * Actualizamos después de transferir.
+     */
+
+    setTimeout(
+      loadCurrent,
+      800
+    );
+
+  }
+  catch(error){
+
+    handleError(error);
+
+  }
+
+}
+
+
+/* ====================================================
+   PLAY / PAUSE LOCAL
+==================================================== */
+
+async function toggleLocalPlay(){
+
+  if(!spotifyPlayer){
+
+    setStatus(
+      "Reproductor no disponible"
+    );
+
+    return;
+  }
+
+  try{
+
+    await spotifyPlayer.togglePlay();
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    setStatus(
+      "No se pudo reproducir"
+    );
+
+  }
+
+}
+
+
+/* ====================================================
+   SIGUIENTE
+==================================================== */
+
+async function nextLocal(){
+
+  if(!spotifyPlayer){
+
+    setStatus(
+      "Reproductor no disponible"
+    );
+
+    return;
+  }
+
+  try{
+
+    await spotifyPlayer.nextTrack();
+
+  }
+  catch(error){
+
+    setStatus(
+      "No se pudo cambiar"
+    );
+
+  }
+
+}
+
+
+/* ====================================================
+   ANTERIOR
+==================================================== */
+
+async function previousLocal(){
+
+  if(!spotifyPlayer){
+
+    setStatus(
+      "Reproductor no disponible"
+    );
+
+    return;
+  }
+
+  try{
+
+    await spotifyPlayer.previousTrack();
+
+  }
+  catch(error){
+
+    setStatus(
+      "No se pudo cambiar"
+    );
+
+  }
+
+}
+
+
+/* ====================================================
+   PLAYLISTS
+==================================================== */
 
 async function loadPlaylists(){
 
   show(playlistScreen);
 
-  var box = document.getElementById(
+  var box =
+  document.getElementById(
     "playlistResults"
   );
 
   box.innerHTML =
-  "<div class='empty'>Cargando playlists...</div>";
+  "<div class='empty'>" +
+  "Cargando playlists..." +
+  "</div>";
 
   try{
 
-    var data = await spotify(
-      API + "/me/playlists?limit=50"
+    var data =
+    await spotify(
+      API +
+      "/me/playlists?limit=50"
     );
 
     box.innerHTML = "";
 
-    if(!data.items || data.items.length === 0){
-      box.innerHTML =
-      "<div class='empty'>No se encontraron playlists</div>";
+    if(
+      !data.items ||
+      data.items.length === 0
+    ){
 
-      setStatus("0 playlists");
+      box.innerHTML =
+      "<div class='empty'>" +
+      "No hay playlists" +
+      "</div>";
+
       return;
     }
 
-    data.items.forEach(function(playlist){
+    data.items.forEach(
+      function(playlist){
 
-      var item = document.createElement("div");
-      item.className = "item";
-
-      var total = 0;
-
-      if(playlist.items &&
-         typeof playlist.items.total !== "undefined"){
-        total = playlist.items.total;
-      }else if(playlist.tracks &&
-               typeof playlist.tracks.total !== "undefined"){
-        total = playlist.tracks.total;
-      }
-
-      item.innerHTML =
-      "<div class='item-title'>" +
-      escapeHTML(playlist.name) +
-      "</div>" +
-      "<div class='item-subtitle'>" +
-      total + " canciones" +
-      "</div>";
-
-      addButton(item,function(){
-        loadPlaylist(
-          playlist.id,
-          playlist.name
+        var item =
+        document.createElement(
+          "div"
         );
-      });
 
-      box.appendChild(item);
-    });
+        item.className =
+        "item";
+
+        var total = 0;
+
+        if(
+          playlist.items &&
+          typeof playlist.items.total !==
+          "undefined"
+        ){
+
+          total =
+          playlist.items.total;
+
+        }
+        else if(
+          playlist.tracks &&
+          typeof playlist.tracks.total !==
+          "undefined"
+        ){
+
+          total =
+          playlist.tracks.total;
+
+        }
+
+        item.innerHTML =
+
+        "<div class='item-title'>" +
+        escapeHTML(
+          playlist.name
+        ) +
+        "</div>" +
+
+        "<div class='item-subtitle'>" +
+        total +
+        " canciones" +
+        "</div>";
+
+        addButton(
+          item,
+          function(){
+
+            loadPlaylist(
+              playlist.id,
+              playlist.name
+            );
+
+          }
+        );
+
+        box.appendChild(item);
+
+      }
+    );
 
     setStatus(
       data.items.length +
-      " playlists cargadas"
+      " playlists"
     );
 
-  }catch(error){
-    handleError(error);
   }
+  catch(error){
+
+    handleError(error);
+
+  }
+
 }
 
 
-/* ================= CANCIONES DE PLAYLIST ================= */
+/* ====================================================
+   PLAYLIST TRACKS
+==================================================== */
 
-async function loadPlaylist(id,name){
+async function loadPlaylist(
+  id,
+  name
+){
 
   show(tracksScreen);
 
   document.getElementById(
     "tracksTitle"
-  ).textContent = name;
+  ).textContent =
+  name;
 
-  var box = document.getElementById(
+  var box =
+  document.getElementById(
     "tracksResults"
   );
 
   box.innerHTML =
-  "<div class='empty'>Cargando canciones...</div>";
+  "<div class='empty'>" +
+  "Cargando..." +
+  "</div>";
 
   try{
 
-    var data = await spotify(
+    var data =
+    await spotify(
       API +
       "/playlists/" +
       encodeURIComponent(id) +
@@ -623,52 +1626,83 @@ async function loadPlaylist(id,name){
 
     var count = 0;
 
-    data.items.forEach(function(entry){
+    data.items.forEach(
+      function(entry){
 
-      var track = entry.item;
+        var track =
+        entry.item;
 
-      if(!track || track.type !== "track"){
-        return;
+        if(
+          !track ||
+          track.type !== "track"
+        ){
+
+          return;
+
+        }
+
+        count++;
+
+        var item =
+        document.createElement(
+          "div"
+        );
+
+        item.className =
+        "item";
+
+        item.innerHTML =
+
+        "<div class='item-title'>" +
+        escapeHTML(
+          track.name
+        ) +
+        "</div>" +
+
+        "<div class='item-subtitle'>" +
+        escapeHTML(
+          track.artists
+          .map(function(a){
+            return a.name;
+          })
+          .join(", ")
+        ) +
+        "</div>";
+
+        addButton(
+          item,
+          function(){
+
+            playTrack(
+              track.uri
+            );
+
+          }
+        );
+
+        box.appendChild(item);
+
       }
+    );
 
-      count++;
+    setStatus(
+      count +
+      " canciones"
+    );
 
-      var item = document.createElement("div");
-      item.className = "item";
-
-      item.innerHTML =
-      "<div class='item-title'>" +
-      escapeHTML(track.name) +
-      "</div>" +
-      "<div class='item-subtitle'>" +
-      escapeHTML(
-        (track.artists || []).map(function(a){
-          return a.name;
-        }).join(", ")
-      ) +
-      "</div>";
-
-      addButton(item,function(){
-        openTrack(track);
-      });
-
-      box.appendChild(item);
-    });
-
-    if(count === 0){
-      box.innerHTML =
-      "<div class='empty'>Esta playlist está vacía</div>";
-    }
-
-    setStatus(count + " canciones");
-
-  }catch(error){
-    handleError(error);
   }
+  catch(error){
+
+    handleError(error);
+
+  }
+
 }
 
 
-/* ================= CANCIONES GUARDADAS ================= */
+/* ====================================================
+   CANCIONES GUARDADAS
+==================================================== */
 
 async function loadLiked(){
 
@@ -679,333 +1713,330 @@ async function loadLiked(){
   ).textContent =
   "MIS CANCIONES";
 
-  var box = document.getElementById(
+  var box =
+  document.getElementById(
     "tracksResults"
   );
 
   box.innerHTML =
-  "<div class='empty'>Cargando canciones guardadas...</div>";
+  "<div class='empty'>" +
+  "Cargando canciones..." +
+  "</div>";
 
   try{
 
-    /* ENDPOINT CORREGIDO */
-    var data = await spotify(
-      API + "/me/tracks?limit=50"
+    var data =
+    await spotify(
+      API +
+      "/me/tracks?limit=50"
     );
 
     box.innerHTML = "";
 
-    if(!data.items || data.items.length === 0){
+    if(
+      !data.items ||
+      data.items.length === 0
+    ){
 
       box.innerHTML =
       "<div class='empty'>" +
       "No tienes canciones guardadas" +
       "</div>";
 
-      setStatus("0 canciones");
       return;
     }
 
-    var count = 0;
+    data.items.forEach(
+      function(entry){
 
-    data.items.forEach(function(entry){
+        var track =
+        entry.track;
 
-      var track = entry.track;
+        if(!track){
 
-      if(!track){
-        return;
+          return;
+
+        }
+
+        var item =
+        document.createElement(
+          "div"
+        );
+
+        item.className =
+        "item";
+
+        item.innerHTML =
+
+        "<div class='item-title'>" +
+        escapeHTML(
+          track.name
+        ) +
+        "</div>" +
+
+        "<div class='item-subtitle'>" +
+        escapeHTML(
+          track.artists
+          .map(function(a){
+            return a.name;
+          })
+          .join(", ")
+        ) +
+        "</div>";
+
+        addButton(
+          item,
+          function(){
+
+            playTrack(
+              track.uri
+            );
+
+          }
+        );
+
+        box.appendChild(item);
+
       }
-
-      count++;
-
-      var item = document.createElement("div");
-      item.className = "item";
-
-      item.innerHTML =
-      "<div class='item-title'>" +
-      escapeHTML(track.name) +
-      "</div>" +
-      "<div class='item-subtitle'>" +
-      escapeHTML(
-        (track.artists || []).map(function(a){
-          return a.name;
-        }).join(", ")
-      ) +
-      "</div>";
-
-      addButton(item,function(){
-        openTrack(track);
-      });
-
-      box.appendChild(item);
-    });
+    );
 
     setStatus(
-      count +
+      data.items.length +
       " canciones guardadas"
     );
 
-  }catch(error){
-    handleError(error);
   }
+  catch(error){
+
+    handleError(error);
+
+  }
+
 }
 
 
-/* ================= BUSQUEDA ================= */
+/* ====================================================
+   REPRODUCIR TRACK EN EL NOKIA
+==================================================== */
 
-async function searchSpotify(){
+async function playTrack(uri){
 
-  var input = document.getElementById(
-    "searchInput"
-  );
+  if(!nokiaDeviceId){
 
-  var query = input.value.trim();
+    setStatus(
+      "El Nokia no está conectado"
+    );
 
-  if(!query){
-    setStatus("Escribe una búsqueda");
+    show(playerScreen);
+
     return;
+
   }
-
-  var box = document.getElementById(
-    "searchResults"
-  );
-
-  box.innerHTML =
-  "<div class='empty'>Buscando...</div>";
 
   try{
 
-    var data = await spotify(
-      API +
-      "/search?type=track&limit=20&q=" +
-      encodeURIComponent(query)
+    await spotify(
+      API + "/me/player",
+      {
+
+        method:"PUT",
+
+        headers:{
+          "Content-Type":
+          "application/json"
+        },
+
+        body:JSON.stringify({
+
+          device_ids:[
+            nokiaDeviceId
+          ],
+
+          play:true
+
+        })
+
+      }
     );
 
-    box.innerHTML = "";
+    /*
+     * Después de transferir el dispositivo,
+     * inicia la pista solicitada.
+     */
 
-    if(!data.tracks ||
-       !data.tracks.items ||
-       data.tracks.items.length === 0){
+    await spotify(
+      API + "/me/player/play",
+      {
 
-      box.innerHTML =
-      "<div class='empty'>Sin resultados</div>";
+        method:"PUT",
 
-      return;
-    }
+        headers:{
+          "Content-Type":
+          "application/json"
+        },
 
-    data.tracks.items.forEach(function(track){
+        body:JSON.stringify({
 
-      var item = document.createElement("div");
-      item.className = "item";
+          uris:[
+            uri
+          ]
 
-      item.innerHTML =
-      "<div class='item-title'>" +
-      escapeHTML(track.name) +
-      "</div>" +
-      "<div class='item-subtitle'>" +
-      escapeHTML(
-        (track.artists || []).map(function(a){
-          return a.name;
-        }).join(", ")
-      ) +
-      "</div>";
+        })
 
-      addButton(item,function(){
-        openTrack(track);
-      });
-
-      box.appendChild(item);
-    });
+      }
+    );
 
     setStatus(
-      data.tracks.items.length +
-      " resultados"
+      "Reproduciendo en Nokia"
     );
 
-  }catch(error){
-    handleError(error);
+    show(playerScreen);
+
   }
+  catch(error){
+
+    handleError(error);
+
+  }
+
 }
 
 
-/* ================= ABRIR CANCION ================= */
-
-function openTrack(track){
-
-  setStatus(
-    "Abriendo en Spotify..."
-  );
-
-  window.location.href =
-  "https://open.spotify.com/track/" +
-  track.id;
-}
-
-
-/* ================= REPRODUCCION ================= */
+/* ====================================================
+   REPRODUCCION ACTUAL
+==================================================== */
 
 async function loadCurrent(){
 
-  show(playerScreen);
+  show(currentScreen);
 
-  var info = document.getElementById(
-    "playerInfo"
+  var box =
+  document.getElementById(
+    "currentInfo"
   );
 
-  info.innerHTML =
-  "<div class='player-title'>Cargando...</div>";
+  box.innerHTML =
+  "<div class='player-title'>" +
+  "Cargando..." +
+  "</div>";
 
   try{
 
-    var data = await spotify(
-      API + "/me/player"
+    var data =
+    await spotify(
+      API +
+      "/me/player"
     );
 
-    if(!data || !data.item){
+    if(
+      !data ||
+      !data.item
+    ){
 
-      info.innerHTML =
+      box.innerHTML =
       "<div class='player-title'>" +
       "Nada reproduciéndose" +
       "</div>" +
-      "<div class='player-artist'>—</div>";
 
-      setStatus("No hay reproducción");
+      "<div class='player-artist'>" +
+      "—" +
+      "</div>";
+
       return;
+
     }
 
-    var track = data.item;
+    var track =
+    data.item;
 
-    info.innerHTML =
+    box.innerHTML =
+
     "<div class='player-title'>" +
-    escapeHTML(track.name) +
+    escapeHTML(
+      track.name
+    ) +
     "</div>" +
+
     "<div class='player-artist'>" +
     escapeHTML(
-      (track.artists || []).map(function(a){
+      track.artists
+      .map(function(a){
         return a.name;
-      }).join(", ")
+      })
+      .join(", ")
     ) +
     "</div>";
 
-    document.getElementById(
-      "playBtn"
-    ).textContent =
-    data.is_playing ? "Ⅱ" : "▶";
-
-    setStatus(
-      data.is_playing ?
-      "Reproduciendo" :
-      "Pausado"
-    );
-
-  }catch(error){
-    handleError(error);
   }
+  catch(error){
+
+    handleError(error);
+
+  }
+
 }
 
 
-async function togglePlay(){
-
-  try{
-
-    var data = await spotify(
-      API + "/me/player"
-    );
-
-    if(data && data.is_playing){
-
-      await spotify(
-        API + "/me/player/pause",
-        {method:"PUT"}
-      );
-
-      setStatus("Pausado");
-
-    }else{
-
-      await spotify(
-        API + "/me/player/play",
-        {method:"PUT"}
-      );
-
-      setStatus("Reproduciendo");
-    }
-
-    setTimeout(loadCurrent,700);
-
-  }catch(error){
-    handleError(error);
-  }
-}
-
-
-async function nextTrack(){
-
-  try{
-
-    await spotify(
-      API + "/me/player/next",
-      {method:"POST"}
-    );
-
-    setStatus("Siguiente canción");
-
-    setTimeout(loadCurrent,700);
-
-  }catch(error){
-    handleError(error);
-  }
-}
-
-
-async function previousTrack(){
-
-  try{
-
-    await spotify(
-      API + "/me/player/previous",
-      {method:"POST"}
-    );
-
-    setStatus("Canción anterior");
-
-    setTimeout(loadCurrent,700);
-
-  }catch(error){
-    handleError(error);
-  }
-}
-
-
-/* ================= ERRORES ================= */
+/* ====================================================
+   ERROR
+==================================================== */
 
 function handleError(error){
 
   console.log(error);
 
-  if(error.message === "NO_LOGIN"){
+  if(
+    error.message ===
+    "NO_LOGIN"
+  ){
+
     setStatus(
-      "Primero inicia sesión"
+      "Inicia sesión primero"
     );
+
     return;
+
   }
 
-  if(error.message === "SESSION_EXPIRED"){
+  if(
+    error.message ===
+    "SESSION_EXPIRED"
+  ){
+
     setStatus(
-      "Sesión caducada. Inicia sesión otra vez"
+      "Sesión caducada"
     );
+
     return;
+
   }
 
   setStatus(
-    "Error: " + error.message
+    "Error: " +
+    error.message
   );
+
 }
 
 
-/* ================= LOGOUT ================= */
+/* ====================================================
+   LOGOUT
+==================================================== */
 
 function logout(){
+
+  if(spotifyPlayer){
+
+    try{
+      spotifyPlayer.disconnect();
+    }
+    catch(e){}
+
+  }
+
+  spotifyPlayer = null;
+  nokiaDeviceId = null;
+  sdkReady = false;
 
   localStorage.removeItem(
     "spotify_access_token"
@@ -1027,13 +2058,19 @@ function logout(){
     "spotify_state"
   );
 
+  deviceStatus.textContent =
+  "Sin iniciar sesión";
+
   setStatus(
     "Sesión cerrada"
   );
+
 }
 
 
-/* ================= BOTONES ================= */
+/* ====================================================
+   BOTONES
+==================================================== */
 
 addButton(
   document.getElementById("loginBtn"),
@@ -1043,8 +2080,13 @@ addButton(
 addButton(
   document.getElementById("searchBtn"),
   function(){
+
     show(searchScreen);
-    setStatus("Busca una canción");
+
+    setStatus(
+      "Busca una canción"
+    );
+
   }
 );
 
@@ -1056,6 +2098,25 @@ addButton(
 addButton(
   document.getElementById("likedBtn"),
   loadLiked
+);
+
+addButton(
+  document.getElementById("playerBtn"),
+  function(){
+
+    show(playerScreen);
+
+    if(
+      sdkLoaded &&
+      getToken() &&
+      !spotifyPlayer
+    ){
+
+      initializePlayer();
+
+    }
+
+  }
 );
 
 addButton(
@@ -1094,27 +2155,154 @@ addButton(
 );
 
 addButton(
+  document.getElementById("currentBack"),
+  homePage
+);
+
+addButton(
+  document.getElementById("activateBtn"),
+  activateAudio
+);
+
+addButton(
+  document.getElementById("transferBtn"),
+  transferToNokia
+);
+
+addButton(
   document.getElementById("refreshPlayer"),
   loadCurrent
 );
 
 addButton(
+  document.getElementById("currentRefresh"),
+  loadCurrent
+);
+
+addButton(
   document.getElementById("playBtn"),
-  togglePlay
+  toggleLocalPlay
 );
 
 addButton(
   document.getElementById("nextBtn"),
-  nextTrack
+  nextLocal
 );
 
 addButton(
   document.getElementById("previousBtn"),
-  previousTrack
+  previousLocal
 );
 
 
-/* ================= TECLADO ================= */
+/* ====================================================
+   BUSQUEDA
+==================================================== */
+
+async function searchSpotify(){
+
+  var input =
+  document.getElementById(
+    "searchInput"
+  );
+
+  var query =
+  input.value.trim();
+
+  if(!query){
+
+    setStatus(
+      "Escribe una búsqueda"
+    );
+
+    return;
+
+  }
+
+  var box =
+  document.getElementById(
+    "searchResults"
+  );
+
+  box.innerHTML =
+  "<div class='empty'>" +
+  "Buscando..." +
+  "</div>";
+
+  try{
+
+    var data =
+    await spotify(
+      API +
+      "/search?type=track&limit=20&q=" +
+      encodeURIComponent(query)
+    );
+
+    box.innerHTML = "";
+
+    data.tracks.items.forEach(
+      function(track){
+
+        var item =
+        document.createElement(
+          "div"
+        );
+
+        item.className =
+        "item";
+
+        item.innerHTML =
+
+        "<div class='item-title'>" +
+        escapeHTML(
+          track.name
+        ) +
+        "</div>" +
+
+        "<div class='item-subtitle'>" +
+        escapeHTML(
+          track.artists
+          .map(function(a){
+            return a.name;
+          })
+          .join(", ")
+        ) +
+        "</div>";
+
+        addButton(
+          item,
+          function(){
+
+            playTrack(
+              track.uri
+            );
+
+          }
+        );
+
+        box.appendChild(item);
+
+      }
+    );
+
+    setStatus(
+      data.tracks.items.length +
+      " resultados"
+    );
+
+  }
+  catch(error){
+
+    handleError(error);
+
+  }
+
+}
+
+
+/* ====================================================
+   TECLADO NOKIA
+==================================================== */
 
 document.addEventListener(
   "keydown",
@@ -1124,25 +2312,47 @@ document.addEventListener(
       event.key === "Escape" ||
       event.key === "ArrowLeft"
     ){
+
       homePage();
+
     }
 
     if(
       event.key === "Enter" &&
-      searchScreen.className.indexOf("active") !== -1
+      searchScreen.className
+      .indexOf("active") !== -1
     ){
+
       searchSpotify();
+
     }
 
   }
 );
 
 
-/* ================= INICIO ================= */
+/* ====================================================
+   INICIO
+==================================================== */
 
 processCallback();
+
+
+/*
+ * Si ya había sesión, el SDK puede inicializarse
+ * automáticamente cuando esté cargado.
+ */
+
+if(
+  getToken() &&
+  window.Spotify
+){
+
+  initializePlayer();
+
+}
 
 </script>
 
 </body>
-</html>
+ </html>
