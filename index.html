@@ -2,54 +2,109 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=240, height=320, initial-scale=1">
+<meta name="viewport" content="width=240,height=320,initial-scale=1">
 
 <title>Spotify</title>
 
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-    background: #121212;
-    color: white;
-    font-family: Arial, sans-serif;
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    background:#121212;
+    color:white;
+    font-family:Arial,sans-serif;
 }
 
-.container {
-    padding: 10px;
+.container{
+    padding:10px;
 }
 
-h1 {
-    margin: 5px 0 15px 0;
-    font-size: 22px;
+h1{
+    margin:5px 0 12px;
+    font-size:20px;
 }
 
-button {
-    display: block;
-    width: 100%;
-    height: 42px;
-    margin-bottom: 7px;
-    border: 0;
-    border-radius: 5px;
-    background: #282828;
-    color: white;
-    font-size: 13px;
-    text-align: left;
-    padding-left: 12px;
+button{
+    display:block;
+    width:100%;
+    height:40px;
+    margin-bottom:6px;
+    border:0;
+    border-radius:5px;
+    background:#282828;
+    color:white;
+    font-size:12px;
+    text-align:left;
+    padding-left:10px;
 }
 
-button:active {
-    background: #1ed760;
-    color: black;
+button:active{
+    background:#1ed760;
+    color:black;
 }
 
-#message {
-    margin-top: 15px;
-    color: #999;
-    font-size: 10px;
+.green{
+    background:#1ed760;
+    color:#000;
+    font-weight:bold;
 }
+
+input{
+    width:100%;
+    height:35px;
+    box-sizing:border-box;
+    margin-bottom:6px;
+    border:0;
+    border-radius:5px;
+    background:#282828;
+    color:white;
+    padding:7px;
+}
+
+#content{
+    margin-top:5px;
+}
+
+.item{
+    background:#181818;
+    padding:8px;
+    margin-bottom:4px;
+    border-radius:4px;
+    font-size:10px;
+}
+
+.item:active{
+    background:#333;
+}
+
+.name{
+    font-size:11px;
+    font-weight:bold;
+}
+
+.artist{
+    color:#999;
+    font-size:9px;
+    margin-top:3px;
+}
+
+#message{
+    margin-top:10px;
+    color:#888;
+    font-size:9px;
+}
+
+.hidden{
+    display:none;
+}
+
+.back{
+    margin-top:6px;
+    background:#222;
+}
+
 </style>
 </head>
 
@@ -57,70 +112,934 @@ button:active {
 
 <div class="container">
 
-    <h1>♫ SPOTIFY</h1>
+<h1>♫ SPOTIFY</h1>
 
-    <button onclick="searchMusic()">
+<div id="home">
+
+    <button
+        class="green"
+        onclick="login()">
+        🔐 Iniciar sesión
+    </button>
+
+    <button onclick="searchPage()">
         🔎 Buscar
     </button>
 
-    <button onclick="showPlaylists()">
+    <button onclick="loadPlaylists()">
         🎵 Mis playlists
     </button>
 
-    <button onclick="showLiked()">
+    <button onclick="loadLiked()">
         ♥ Mis canciones
     </button>
 
-    <button onclick="showPlayer()">
+    <button onclick="nowPlaying()">
         ▶ Reproducción actual
     </button>
 
-    <div id="message">
-        Widget iniciado correctamente
-    </div>
+</div>
+
+
+<div id="search" class="hidden">
+
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="Canción o artista">
+
+    <button
+        class="green"
+        onclick="searchSpotify()">
+        🔎 Buscar
+    </button>
+
+    <div id="searchResults"></div>
+
+    <button
+        class="back"
+        onclick="home()">
+        ← Volver
+    </button>
 
 </div>
 
+
+<div id="lists" class="hidden">
+
+    <div id="listTitle">
+        <b>Playlists</b>
+    </div>
+
+    <div id="listContent"></div>
+
+    <button
+        class="back"
+        onclick="home()">
+        ← Volver
+    </button>
+
+</div>
+
+
+<div id="message">
+    Widget listo
+</div>
+
+</div>
+
+
 <script>
 
-function searchMusic() {
-    document.getElementById("message").innerHTML =
-        "Buscar música";
+/* ==============================
+   CONFIGURACIÓN
+============================== */
+
+var CLIENT_ID =
+"8b61d543ab204a01986a47f38e419304";
+
+var REDIRECT_URI =
+"https://cristiandavoh-svg.github.io/Cloudphone-widget/callback";
+
+
+var API =
+"https://api.spotify.com/v1";
+
+
+/* ==============================
+   PANTALLAS
+============================== */
+
+function hideAll(){
+
+    document.getElementById("home")
+        .className="hidden";
+
+    document.getElementById("search")
+        .className="hidden";
+
+    document.getElementById("lists")
+        .className="hidden";
 }
 
-function showPlaylists() {
-    document.getElementById("message").innerHTML =
-        "Mis playlists";
+
+function home(){
+
+    hideAll();
+
+    document.getElementById("home")
+        .className="";
+
+    message("Listo");
+
 }
 
-function showLiked() {
-    document.getElementById("message").innerHTML =
-        "Mis canciones";
+
+function searchPage(){
+
+    hideAll();
+
+    document.getElementById("search")
+        .className="";
+
+    document.getElementById("searchInput")
+        .focus();
+
 }
 
-function showPlayer() {
-    document.getElementById("message").innerHTML =
-        "Reproducción actual";
+
+/* ==============================
+   MENSAJE
+============================== */
+
+function message(text){
+
+    document.getElementById("message")
+        .innerHTML=text;
+
 }
 
-document.addEventListener("keydown", function(event) {
 
-    if (event.key === "ArrowDown") {
-        document.getElementById("message").innerHTML =
-            "↓";
+/* ==============================
+   LOGIN
+============================== */
+
+function login(){
+
+    var state =
+        Math.random()
+        .toString(36)
+        .substring(2);
+
+
+    localStorage.setItem(
+        "spotify_state",
+        state
+    );
+
+
+    var scope =
+        "user-read-private " +
+        "user-read-email " +
+        "playlist-read-private " +
+        "playlist-read-collaborative " +
+        "user-library-read";
+
+
+    var url =
+        "https://accounts.spotify.com/authorize" +
+        "?client_id=" +
+        encodeURIComponent(CLIENT_ID) +
+        "&response_type=token" +
+        "&redirect_uri=" +
+        encodeURIComponent(REDIRECT_URI) +
+        "&scope=" +
+        encodeURIComponent(scope) +
+        "&state=" +
+        encodeURIComponent(state);
+
+
+    window.location.href=url;
+
+}
+
+
+/* ==============================
+   TOKEN
+============================== */
+
+function getToken(){
+
+    var token =
+        localStorage.getItem(
+            "spotify_token"
+        );
+
+
+    if(token){
+        return token;
     }
 
-    if (event.key === "ArrowUp") {
-        document.getElementById("message").innerHTML =
-            "↑";
+
+    var hash =
+        window.location.hash;
+
+
+    if(!hash){
+        return null;
     }
 
-    if (event.key === "Enter") {
-        document.getElementById("message").innerHTML =
-            "ENTER";
+
+    var params =
+        new URLSearchParams(
+            hash.substring(1)
+        );
+
+
+    token =
+        params.get("access_token");
+
+
+    if(token){
+
+        localStorage.setItem(
+            "spotify_token",
+            token
+        );
+
+
+        window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+        );
+
+
+        return token;
     }
 
-});
+
+    return null;
+}
+
+
+/* ==============================
+   API
+============================== */
+
+function spotifyFetch(
+    url,
+    callback
+){
+
+    var token=getToken();
+
+
+    if(!token){
+
+        message(
+            "Primero inicia sesión"
+        );
+
+        return;
+    }
+
+
+    fetch(
+        url,
+        {
+            headers:{
+                "Authorization":
+                "Bearer "+token
+            }
+        }
+    )
+    .then(function(response){
+
+        if(response.status===401){
+
+            localStorage.removeItem(
+                "spotify_token"
+            );
+
+            throw new Error(
+                "Sesión caducada"
+            );
+        }
+
+
+        return response.json();
+
+    })
+    .then(callback)
+    .catch(function(error){
+
+        message(
+            "Error: "+error.message
+        );
+
+    });
+
+}
+
+
+/* ==============================
+   BÚSQUEDA
+============================== */
+
+function searchSpotify(){
+
+    var query =
+        document.getElementById(
+            "searchInput"
+        ).value;
+
+
+    if(!query){
+
+        message(
+            "Escribe una canción"
+        );
+
+        return;
+    }
+
+
+    message(
+        "Buscando..."
+    );
+
+
+    var url =
+        API +
+        "/search?type=track&limit=20&q=" +
+        encodeURIComponent(query);
+
+
+    spotifyFetch(
+        url,
+        showSearchResults
+    );
+
+}
+
+
+/* ==============================
+   RESULTADOS
+============================== */
+
+function showSearchResults(data){
+
+    var box =
+        document.getElementById(
+            "searchResults"
+        );
+
+
+    box.innerHTML="";
+
+
+    if(
+        !data.tracks ||
+        !data.tracks.items.length
+    ){
+
+        box.innerHTML=
+            "<div class='item'>" +
+            "No encontramos canciones" +
+            "</div>";
+
+        return;
+    }
+
+
+    data.tracks.items.forEach(
+        function(track){
+
+            var item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className="item";
+
+
+            item.innerHTML=
+                "<div class='name'>" +
+                escapeHTML(track.name) +
+                "</div>" +
+
+                "<div class='artist'>" +
+                escapeHTML(
+                    track.artists
+                    .map(
+                        function(a){
+                            return a.name;
+                        }
+                    )
+                    .join(", ")
+                ) +
+                "</div>";
+
+
+            item.onclick=function(){
+
+                openTrack(track);
+
+            };
+
+
+            box.appendChild(item);
+
+        }
+    );
+
+
+    message(
+        "Toca una canción"
+    );
+
+}
+
+
+/* ==============================
+   ABRIR CANCIÓN
+============================== */
+
+function openTrack(track){
+
+    message(
+        "Abriendo Spotify..."
+    );
+
+
+    /*
+       Spotify URI:
+       spotify:track:XXXXXXXX
+    */
+
+    var uri =
+        track.uri;
+
+
+    /*
+       Primero intentamos
+       abrir Spotify directamente.
+    */
+
+    window.location.href=uri;
+
+
+    /*
+       Si Cloud Phone no soporta
+       spotify:, podremos cambiar
+       posteriormente esto por
+       open.spotify.com.
+    */
+
+}
+
+
+/* ==============================
+   PLAYLISTS
+============================== */
+
+function loadPlaylists(){
+
+    hideAll();
+
+    document.getElementById("lists")
+        .className="";
+
+
+    document.getElementById(
+        "listTitle"
+    ).innerHTML=
+        "<b>🎵 Mis playlists</b>";
+
+
+    document.getElementById(
+        "listContent"
+    ).innerHTML=
+        "<div class='item'>" +
+        "Cargando..." +
+        "</div>";
+
+
+    spotifyFetch(
+        API+
+        "/me/playlists?limit=50",
+        showPlaylists
+    );
+
+}
+
+
+function showPlaylists(data){
+
+    var box =
+        document.getElementById(
+            "listContent"
+        );
+
+
+    box.innerHTML="";
+
+
+    if(
+        !data.items ||
+        !data.items.length
+    ){
+
+        box.innerHTML=
+            "<div class='item'>" +
+            "No tienes playlists" +
+            "</div>";
+
+        return;
+    }
+
+
+    data.items.forEach(
+        function(playlist){
+
+            var item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className="item";
+
+
+            item.innerHTML=
+                "<div class='name'>" +
+                escapeHTML(
+                    playlist.name
+                ) +
+                "</div>" +
+
+                "<div class='artist'>" +
+                playlist.tracks.total +
+                " canciones" +
+                "</div>";
+
+
+            item.onclick=function(){
+
+                loadPlaylist(
+                    playlist.id,
+                    playlist.name
+                );
+
+            };
+
+
+            box.appendChild(item);
+
+        }
+    );
+
+
+    message(
+        "Toca una playlist"
+    );
+
+}
+
+
+/* ==============================
+   CANCIONES DE PLAYLIST
+============================== */
+
+function loadPlaylist(
+    id,
+    name
+){
+
+    document.getElementById(
+        "listTitle"
+    ).innerHTML=
+        "<b>"+
+        escapeHTML(name)+
+        "</b>";
+
+
+    document.getElementById(
+        "listContent"
+    ).innerHTML=
+        "<div class='item'>" +
+        "Cargando canciones..." +
+        "</div>";
+
+
+    spotifyFetch(
+        API+
+        "/playlists/"+
+        id+
+        "/tracks?limit=50",
+        showPlaylistTracks
+    );
+
+}
+
+
+function showPlaylistTracks(data){
+
+    var box =
+        document.getElementById(
+            "listContent"
+        );
+
+
+    box.innerHTML="";
+
+
+    data.items.forEach(
+        function(entry){
+
+            if(!entry.track)
+                return;
+
+
+            var track=
+                entry.track;
+
+
+            var item=
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className="item";
+
+
+            item.innerHTML=
+                "<div class='name'>" +
+                escapeHTML(
+                    track.name
+                ) +
+                "</div>" +
+
+                "<div class='artist'>" +
+                escapeHTML(
+                    track.artists
+                    .map(
+                        function(a){
+                            return a.name;
+                        }
+                    )
+                    .join(", ")
+                ) +
+                "</div>";
+
+
+            item.onclick=function(){
+
+                openTrack(track);
+
+            };
+
+
+            box.appendChild(item);
+
+        }
+    );
+
+
+    message(
+        "Toca una canción"
+    );
+
+}
+
+
+/* ==============================
+   CANCIONES GUARDADAS
+============================== */
+
+function loadLiked(){
+
+    hideAll();
+
+    document.getElementById("lists")
+        .className="";
+
+
+    document.getElementById(
+        "listTitle"
+    ).innerHTML=
+        "<b>♥ Mis canciones</b>";
+
+
+    document.getElementById(
+        "listContent"
+    ).innerHTML=
+        "<div class='item'>" +
+        "Cargando..." +
+        "</div>";
+
+
+    spotifyFetch(
+        API+
+        "/me/tracks?limit=50",
+        showLiked
+    );
+
+}
+
+
+function showLiked(data){
+
+    var box =
+        document.getElementById(
+            "listContent"
+        );
+
+
+    box.innerHTML="";
+
+
+    data.items.forEach(
+        function(entry){
+
+            var track=
+                entry.track;
+
+
+            var item=
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className="item";
+
+
+            item.innerHTML=
+                "<div class='name'>" +
+                escapeHTML(
+                    track.name
+                ) +
+                "</div>" +
+
+                "<div class='artist'>" +
+                escapeHTML(
+                    track.artists
+                    .map(
+                        function(a){
+                            return a.name;
+                        }
+                    )
+                    .join(", ")
+                ) +
+                "</div>";
+
+
+            item.onclick=function(){
+
+                openTrack(track);
+
+            };
+
+
+            box.appendChild(item);
+
+        }
+    );
+
+
+    message(
+        "Toca una canción"
+    );
+
+}
+
+
+/* ==============================
+   REPRODUCCIÓN ACTUAL
+============================== */
+
+function nowPlaying(){
+
+    hideAll();
+
+    document.getElementById("lists")
+        .className="";
+
+
+    document.getElementById(
+        "listTitle"
+    ).innerHTML=
+        "<b>▶ Reproducción actual</b>";
+
+
+    spotifyFetch(
+        API+
+        "/me/player",
+        showCurrent
+    );
+
+}
+
+
+function showCurrent(data){
+
+    var box=
+        document.getElementById(
+            "listContent"
+        );
+
+
+    box.innerHTML="";
+
+
+    if(
+        !data ||
+        !data.item
+    ){
+
+        box.innerHTML=
+            "<div class='item'>" +
+            "No hay nada reproduciéndose" +
+            "</div>";
+
+        return;
+    }
+
+
+    var track=data.item;
+
+
+    var item=
+        document.createElement(
+            "div"
+        );
+
+
+    item.className="item";
+
+
+    item.innerHTML=
+        "<div class='name'>" +
+        escapeHTML(
+            track.name
+        ) +
+        "</div>" +
+
+        "<div class='artist'>" +
+        escapeHTML(
+            track.artists
+            .map(
+                function(a){
+                    return a.name;
+                }
+            )
+            .join(", ")
+        ) +
+        "</div>";
+
+
+    item.onclick=function(){
+
+        openTrack(track);
+
+    };
+
+
+    box.appendChild(item);
+
+}
+
+
+/* ==============================
+   SEGURIDAD
+============================== */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* ==============================
+   TECLADO
+============================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key==="Escape"){
+
+            home();
+
+        }
+
+
+        if(event.key==="ArrowLeft"){
+
+            home();
+
+        }
+
+    }
+);
+
+
+/* ==============================
+   INICIO
+============================== */
+
+getToken();
 
 </script>
 
