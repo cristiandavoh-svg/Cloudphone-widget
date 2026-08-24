@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=240, height=320, initial-scale=1.0">
+<title>Music</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        width: 240px;
+        height: 320px;
+        background: #000;
+        color: #fff;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    #app {
+        width: 240px;
+        height: 320px;
+        padding: 12px;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin: 5px 0 20px;
+    }
+
+    #cover {
+        width: 100px;
+        height: 100px;
+        margin: auto;
+        border: 2px solid #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+    }
+
+    #title {
+        font-size: 15px;
+        margin-top: 15px;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    #status {
+        font-size: 12px;
+        margin-top: 8px;
+    }
+
+    .controls {
+        margin-top: 20px;
+        font-size: 22px;
+    }
+
+    .selected {
+        border: 1px solid white;
+        padding: 3px 7px;
+    }
+
+    .help {
+        position: absolute;
+        bottom: 5px;
+        left: 0;
+        width: 240px;
+        text-align: center;
+        font-size: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+    <h1>MY MUSIC</h1>
+
+    <div id="cover">♪</div>
+
+    <div id="title">Test Music 1</div>
+
+    <div id="status">PAUSADO</div>
+
+    <div class="controls">
+        <span id="prev">◀</span>
+        <span id="play" class="selected">▶</span>
+        <span id="next">▶</span>
+    </div>
+
+    <div class="help">
+        ← → seleccionar &nbsp; ENTER reproducir
+    </div>
+
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+
+const songs = [
+    {
+        title: "Test Music 1",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    },
+    {
+        title: "Test Music 2",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    }
+];
+
+let currentSong = 0;
+let selected = 1;
+
+const audio = document.getElementById("audio");
+const title = document.getElementById("title");
+const status = document.getElementById("status");
+
+function loadSong() {
+    audio.src = songs[currentSong].url;
+    title.textContent = songs[currentSong].title;
+    status.textContent = "PAUSADO";
+}
+
+function playPause() {
+
+    if (audio.paused) {
+        audio.play().then(() => {
+            status.textContent = "REPRODUCIENDO";
+        }).catch(() => {
+            status.textContent = "ERROR DE AUDIO";
+        });
+    } else {
+        audio.pause();
+        status.textContent = "PAUSADO";
+    }
+}
+
+function nextSong() {
+
+    currentSong++;
+
+    if (currentSong >= songs.length) {
+        currentSong = 0;
+    }
+
+    loadSong();
+}
+
+function previousSong() {
+
+    currentSong--;
+
+    if (currentSong < 0) {
+        currentSong = songs.length - 1;
+    }
+
+    loadSong();
+}
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+        playPause();
+    }
+
+    if (event.key === "ArrowRight") {
+        nextSong();
+    }
+
+    if (event.key === "ArrowLeft") {
+        previousSong();
+    }
+
+    if (event.key === "*") {
+        previousSong();
+    }
+
+    if (event.key === "#") {
+        nextSong();
+    }
+});
+
+audio.addEventListener("ended", function() {
+    nextSong();
+    playPause();
+});
+
+loadSong();
+
+</script>
+
+</body>
+</html>
